@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\layout",
+    "\\src\\layout\\components",
+    "\\src\\store",
+    "\\src\\store\\modules",
+    "\\src\\utils",
+    "\\src\\views",
+    "\\src\\views\\dashboard",
+    "\\src\\views\\form"
+  ],
+  "SelectedNode": "\\src\\views\\form\\index.vue",
+  "PreviewInSolutionExplorer": false
+}
