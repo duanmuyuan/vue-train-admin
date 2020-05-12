@@ -4,6 +4,7 @@
       西宁工务机械段职工培训云平台
     </div>
     <div class="content">
+      <!-- router -->
       <el-menu
         class="el-menu-demo"
         :default-active="activeIndex"
@@ -12,15 +13,17 @@
         text-color="#fff"
         active-text-color="#fff"
         unique-opened
-        router
         @select="handleSelect"
       >
         <el-menu-item
-          v-for="item in menuList"
-          :key="item.index"
+          v-for="(item, index) in menuList"
+          :key="index"
           :index="item.index"
         >
-          {{ item.title }}
+          <template slot="title">
+            <i :class="item.icon" />
+            <span>{{ item.title }}</span>
+          </template>
         </el-menu-item>
       </el-menu>
       <!--<ul>
@@ -36,16 +39,14 @@
           placement="bottom"
         >
           <router-link to="/tabs">
-            <i class="el-icon-bell" />
+            <i class="el-icon-message-solid" />
           </router-link>
         </el-tooltip>
-        <span v-if="message" class="btn-bell-badge" />
+        <span v-if="message" class="btn-bell-badge">5</span>
       </div>
       <!-- 用户头像 -->
       <div class="user-avator">
-        <!--<img src="../../assets/img/img.jpg" />-->
-        <i class="el-icon-user" />
-        admin
+        <i class="el-icon-user-solid" />
       </div>
       <!-- 用户名下拉菜单 -->
       <el-dropdown class="user-name" trigger="click" @command="handleCommand">
@@ -54,9 +55,12 @@
           <i class="el-icon-caret-bottom" />
         </span>
         <el-dropdown-menu slot="dropdown">
-          <a href="https://github.com/lin-xin/vue-manage-system" target="_blank">
+          <a href="https://github.com/" target="_blank">
             <el-dropdown-item>项目仓库</el-dropdown-item>
           </a>
+          <el-dropdown-item>学习中心</el-dropdown-item>
+          <el-dropdown-item>管理后台</el-dropdown-item>
+          <el-dropdown-item>我的账号</el-dropdown-item>
           <el-dropdown-item divided command="loginout">退出登录</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
@@ -65,56 +69,22 @@
 </template>
 
 <script>
+import { menu } from "@/api/menu"
+
 export default {
   data() {
     return {
       collapse: false,
       fullscreen: false,
       message: 2,
-      activeIndex: 'dashboard',
-      menuList: [
-        {
-          index: "dashboard",
-          icon: "el-icon-s-home",
-          title: "管理首页"
-        },
-        {
-          index: "course",
-          icon: "el-icon-s-platform",
-          title: "线上"
-        },
-        {
-          index: "practice",
-          icon: "el-icon-s-home",
-          title: "线下"
-        },
-        {
-          index: "exam",
-          icon: "el-icon-s-home",
-          title: "考试"
-        },
-        {
-          index: "training",
-          icon: "el-icon-s-home",
-          title: "数据报表"
-        },
-        {
-          index: "library",
-          icon: "el-icon-s-home",
-          title: "数据分析"
-        },
-        {
-          index: "personal",
-          icon: "el-icon-s-home",
-          title: "系统"
-        }
-      ]
+      activeIndex: 'home',
+      menuList: menu
     }
   },
   computed: {
     username() {
       const username = localStorage.getItem('ms_username')
-      return username || this.name
+      return username || 'admin'
     }
   },
   mounted() {
@@ -155,14 +125,18 @@ export default {
       padding-right: 20px;
   }
   .content {
-      width: 600px;
+      width: 800px;
       position: fixed;
       left: 50%;
       transform: translateX(-50%);
       top: 0;
+      color: #fff;
       .is-active {
         border-bottom: none !important;
         background-color: #01517E !important;
+      }
+      .el-menu-item i {
+        color: #fff;
       }
   }
   .header-user-con {
@@ -178,21 +152,28 @@ export default {
 .btn-bell,
 .btn-fullscreen {
     position: relative;
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     text-align: center;
     border-radius: 15px;
     cursor: pointer;
+    .el-icon-message-solid {
+      font-size: 20px;
+      color: #fff;
+    }
 }
 .btn-bell-badge {
     position: absolute;
-    right: 0;
-    top: -2px;
-    width: 8px;
-    height: 8px;
-    border-radius: 4px;
+    right: -10px;
+    top: -10px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
     background: #f56c6c;
     color: #fff;
+    font-size: 10px;
+    text-align: center;
+    line-height: 16px;
 }
 .btn-bell .el-icon-bell {
     color: #fff;

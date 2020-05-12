@@ -1,9 +1,12 @@
 <template>
   <div class="app-page">
-    <head-nav />
+    <!-- <head-nav /> -->
+    <full-header />
     <div :class="classObj" class="app-wrapper">
-      <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
-      <sidebar class="sidebar-container" />
+      <!-- v-if="device==='mobile'&&sidebar.opened"  -->
+      <!-- <div class="drawer-bg" @click="handleClickOutside" /> -->
+      <!-- <sidebar class="sidebar-container" /> -->
+      <full-sidebar />
       <div class="main-container">
         <div :class="{'fixed-header':fixedHeader}">
           <navbar />
@@ -16,18 +19,22 @@
 </template>
 
 <script>
-import { Navbar, Sidebar, AppMain, HeadNav } from './components'
-import ResizeMixin from './mixin/ResizeHandler'
+import { Navbar, AppMain } from './components'
+// import ResizeMixin from './mixin/ResizeHandler'
+import FullHeader from "@/components/FullHeader"
+import FullSidebar from "@/components/FullSidebar"
 
 export default {
   name: 'Layout',
   components: {
     Navbar,
-    Sidebar,
     AppMain,
-    HeadNav
+    FullHeader,
+    FullSidebar
+    // HeadNav,
+    // Sidebar,
   },
-  mixins: [ResizeMixin],
+  // mixins: [ResizeMixin],
   computed: {
     sidebar() {
       return this.$store.state.app.sidebar
@@ -46,7 +53,8 @@ export default {
       //   mobile: this.device === 'mobile'
       // }
       return {
-        openSidebar: true
+        openSidebar: true,
+        withoutAnimation: this.sidebar.withoutAnimation
       }
     }
   },

@@ -1,5 +1,5 @@
 <template>
-  <div class="dashboard-container">
+  <div class="app-main-container">
     <div class="router-container">
       <div class="main-header">
         <div class="left">
@@ -62,7 +62,7 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'Dashboard',
+  name: 'Home',
   data() {
     return {
       dateValue: '',

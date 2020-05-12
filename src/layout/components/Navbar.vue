@@ -32,9 +32,13 @@ export default {
 
 <style lang="scss" scoped>
 .navbar {
+  width: calc(100% - 240px);
   height: 50px;
   overflow: hidden;
-  position: relative;
+  position: fixed;
+  top: 60px;
+  right: 0;
+  z-index: 9;
   background: #F7F8FA;
   box-shadow: 0 1px 4px rgba(0,21,41,.08);
 
